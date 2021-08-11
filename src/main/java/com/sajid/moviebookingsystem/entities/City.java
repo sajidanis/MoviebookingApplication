@@ -1,6 +1,7 @@
 package com.sajid.moviebookingsystem.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class City {
@@ -10,6 +11,12 @@ public class City {
 
     @Column(length = 20, nullable = false)
     private String cityName;
+
+    /*
+    Default strategy is Lazy for fetch
+     */
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private Set<Theatre> theatres;
 
     public City() {
     }

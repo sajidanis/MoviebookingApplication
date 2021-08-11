@@ -2,6 +2,7 @@ package com.sajid.moviebookingsystem.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -11,15 +12,49 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int movieId;
+
+    @Column(length = 50, nullable = false, unique = true)
     private String movieName;
 
     @Column(name="DESCRIPTION", length = 500, nullable = false)
     private String movieDescription;
 
+    @Column(nullable = false)
     private LocalDateTime releaseDate;
+
+    @Column(nullable = false)
     private int duration;
+
+    @Column(length = 500, nullable = false)
     private String coverPhotoUrl;
+
+    @Column(length = 500, nullable = false)
     private String trailerUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+//
+//    @JoinTable(name="movie_theatre", joinColumns = @JoinColumn(name = "movie_id"),
+//            inverseJoinColumns = @JoinColumn(name = "theatre_id"))
+//    @ManyToMany
+//    private List<Theatre> theatres;
+//
+//    public List<Theatre> getTheatres() {
+//        return theatres;
+//    }
+//
+//    public void setTheatres(List<Theatre> theatres) {
+//        this.theatres = theatres;
+//    }
 
     public int getMovieId() {
         return movieId;

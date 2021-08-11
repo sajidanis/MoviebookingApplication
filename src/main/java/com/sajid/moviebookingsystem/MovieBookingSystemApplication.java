@@ -1,7 +1,11 @@
 package com.sajid.moviebookingsystem;
 
 import com.sajid.moviebookingsystem.dao.MovieDao;
+import com.sajid.moviebookingsystem.dao.StatusDao;
 import com.sajid.moviebookingsystem.entities.Movie;
+import com.sajid.moviebookingsystem.entities.Status;
+import com.sajid.moviebookingsystem.exceptions.MovieDetailsNotFoundException;
+import com.sajid.moviebookingsystem.services.MovieService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,24 +16,31 @@ public class MovieBookingSystemApplication {
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(MovieBookingSystemApplication.class, args);
-        MovieDao movieDao = ctx.getBean(MovieDao.class);
-        /*
-          I should be able to save the data
-         */
+        System.out.println("Movie Booking Application");
+
+        MovieService movieService = ctx.getBean(MovieService.class);
+
+        StatusDao statusDao = ctx.getBean(StatusDao.class);
+        Status status = new Status();
+        status.setStatusName("RELEASED");
+        statusDao.save(status);
+
         Movie movie = new Movie();
-        movie.setMovieName("Tenet");
-        movie.setMovieDescription("Awesome Movie");
-        movie.setReleaseDate(LocalDateTime.of(2021,4,27, 0, 0, 0));
-        movie.setDuration(150);
-        movie.setCoverPhotoUrl("cover-photo-url");
+        movie.setMovieName("Inception");
+        movie.setMovieDescription("Best Movie");
+        movie.setCoverPhotoUrl("cover-photo");
+        movie.setDuration(120);
+        movie.setReleaseDate(LocalDateTime.of(2021, 1, 1, 0, 0, 0));
+        movie.setStatus(status);
         movie.setTrailerUrl("trailer-url");
+        Movie ret = movieService.acceptMovieDetails(movie);
 
-        System.out.println("Movie: " + movie);
-        System.out.println("Running Spring Boot Web App");
-
-        System.out.println("Saving the movie");
-        Movie savedObject = movieDao.save(movie);
-        System.out.println(savedObject);
+        try {
+            movieService.getMovieDetails(ret.getMovieId());
+        } catch (MovieDetailsNotFoundException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

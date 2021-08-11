@@ -1,5 +1,7 @@
 package com.sajid.moviebookingsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,6 +16,31 @@ public class Booking {
 
     @Column(nullable = false)
     private int noOfSeats;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_theatre_id", nullable = false)
+    private MovieTheatre movieTheatre;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public MovieTheatre getMovieTheatre() {
+        return movieTheatre;
+    }
+
+    public void setMovieTheatre(MovieTheatre movieTheatre) {
+        this.movieTheatre = movieTheatre;
+    }
 
     public int getBookingId() {
         return bookingId;
