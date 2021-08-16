@@ -1,4 +1,4 @@
-package com.sajid.moviebookingsystem.services;
+package com.sajid.moviebookingsystem.service;
 
 import com.sajid.moviebookingsystem.entities.Movie;
 import com.sajid.moviebookingsystem.exceptions.MovieDetailsNotFoundException;
