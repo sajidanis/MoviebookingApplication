@@ -38,6 +38,9 @@ public class InitServiceImpl implements InitService {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private LanguageService languageService;
+
     List<City> cities = Arrays.asList(new City("Patna"), new City("Mumbai"), new City("Kolkata"), new City("Bangalore"));
     List<UserType> userTypes = Arrays.asList(new UserType("Customer"), new UserType("Admin"));
     List<Language> languages = Arrays.asList(new Language("English"), new Language("Hindi"), new Language("Bengali"));
@@ -110,7 +113,8 @@ public class InitServiceImpl implements InitService {
         customer.setPassword("emma@amme");
         customer.setDateOfBirth(LocalDateTime.of(1988, 11, 6, 0, 0));
         customer.setUserType(userTypes.get(0));
-        customer.setLanguage(languages.get(0));
+        Language language = languageService.acceptLanguageDetails(languages.get(0));
+        customer.setLanguage(language);
         customer = userService.acceptUserDetails(customer);
     }
 
