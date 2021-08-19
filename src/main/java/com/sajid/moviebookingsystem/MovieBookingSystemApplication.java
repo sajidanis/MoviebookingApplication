@@ -1,11 +1,10 @@
 package com.sajid.moviebookingsystem;
 
-import com.sajid.moviebookingsystem.dao.MovieDao;
 import com.sajid.moviebookingsystem.dao.StatusDao;
 import com.sajid.moviebookingsystem.entities.Movie;
 import com.sajid.moviebookingsystem.entities.Status;
 import com.sajid.moviebookingsystem.exceptions.MovieDetailsNotFoundException;
-import com.sajid.moviebookingsystem.services.MovieService;
+import com.sajid.moviebookingsystem.service.MovieService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

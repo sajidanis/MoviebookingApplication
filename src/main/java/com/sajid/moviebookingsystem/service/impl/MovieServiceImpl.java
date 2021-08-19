@@ -1,9 +1,9 @@
-package com.sajid.moviebookingsystem.services.impl;
+package com.sajid.moviebookingsystem.service.impl;
 
 import com.sajid.moviebookingsystem.dao.MovieDao;
 import com.sajid.moviebookingsystem.entities.Movie;
 import com.sajid.moviebookingsystem.exceptions.MovieDetailsNotFoundException;
-import com.sajid.moviebookingsystem.services.MovieService;
+import com.sajid.moviebookingsystem.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
